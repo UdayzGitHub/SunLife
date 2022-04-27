@@ -1,0 +1,40 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" 
+                access="global" controller="AccountController" >
+	<aura:attribute name="data" type="Object" />
+    <aura:attribute name="columns" type="List" />
+    <aura:attribute name="sortDirection" type="String" default="asc" />
+    <aura:attribute name="defaultSortDirection" type="String" default="asc" />
+    <aura:attribute name="sortedBy" type="String" />
+    <!--<aura:attribute name="draftValues" type="Object" default="[]"/>-->
+
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    
+    
+    
+    <lightning:card title="Financial Services Account Listing">
+        <div onkeyup="{! c.handleKeyUp }">
+            <lightning:input
+                             aura:id="enter-search"
+                             name="enter-search"
+                             label="Search when user hits the 'enter' key"
+                             type="search"
+                             />
+        </div>
+        <div>
+            <lightning:datatable
+                             aura:id="acctTable"
+                             keyField="id"
+                             columns="{!v.columns }"
+                             data="{!v.data}"
+                             hideCheckBoxColumn="true"
+                             defaultSortDirection="{!v.defaultSortDirection}"
+                             sortedDirection="{!v.sortDirection}"
+                             sortedBy="{!v.sortedBy}"
+                             onsort="{!c.handleSort}"
+                             onsave="{! c.handleSaveEdition }">
+        	</lightning:datatable>
+        </div>
+        
+    </lightning:card>
+	
+</aura:component>
